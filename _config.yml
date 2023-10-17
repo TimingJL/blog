@@ -23,7 +23,7 @@ langselect:
 # URL
 ## If your site is put in a subdirectory, set url as 'http://yoursite.com/child' and root as '/child/'
 url: http://yoursite-url      # Note: don't forget to modify the CNAME file to your url
-root: /blog
+root: /
 permalink: :lang/:title/
 permalink_defaults:
 
@@ -382,3 +382,4 @@ deploy:
   type: git
   repo: https://github.com/TimingJL/blog # or https://gitee.com/<yourAccount>/<repo>
   branch: main
+  root: /blog
