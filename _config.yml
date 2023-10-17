@@ -382,4 +382,5 @@ deploy:
   type: git
   repo: https://github.com/TimingJL/blog # or https://gitee.com/<yourAccount>/<repo>
   branch: main
-  root: /blog
+
+baseurl: /blog
