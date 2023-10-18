@@ -2,10 +2,11 @@
   "name": "blog",
   "version": "0.0.0",
   "private": true,
+  "homepage": "https://timingjl.github.io/blog/",
   "scripts": {
     "build": "hexo generate",
     "clean": "hexo clean",
-    "deploy": "hexo clean && hexo deploy",
+    "deploy": "hexo clean && hexo generate && hexo deploy",
     "server": "hexo server"
   },
   "hexo": {

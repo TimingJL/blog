@@ -22,8 +22,10 @@ langselect:
 
 # URL
 ## If your site is put in a subdirectory, set url as 'http://yoursite.com/child' and root as '/child/'
-url: https://timingjl.github.io/blog/      # Note: don't forget to modify the CNAME file to your url
+url: https://blog.taiming.me      # Note: don't forget to modify the CNAME file to your url
 root: /
+# url: https://timingjl.github.io/blog      # Note: don't forget to modify the CNAME file to your url
+# root: /blog/
 permalink: :lang/:title/
 permalink_defaults:
 
@@ -381,4 +383,4 @@ gitter:
 deploy:
   type: git
   repo: https://github.com/TimingJL/blog # or https://gitee.com/<yourAccount>/<repo>
-  branch: main
+  branch: gh-pages
