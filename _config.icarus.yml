@@ -107,8 +107,8 @@ navbar:
     menu:
         Home: /
         Archives: /archives
-        Categories: /categories
-        Tags: /tags
+        # Categories: /categories
+        # Tags: /tags
         About: /about
     # Links to be shown on the right of the navigation bar
     # links:
@@ -288,16 +288,16 @@ widgets:
             Huli's Blog: https://life.huli.tw/
             Summer。桑莫。夏天: https://www.cythilya.tw/
             PJCHENder 未整理筆記: https://pjchender.dev/
-    # Categories widget configurations
-    -
-        # Where should the widget be placed, left sidebar or right sidebar
-        position: left
-        type: categories
     # Recent posts widget configurations
     -
         # Where should the widget be placed, left sidebar or right sidebar
         position: right
         type: recent_posts
+    # Categories widget configurations
+    -
+        # Where should the widget be placed, left sidebar or right sidebar
+        position: right
+        type: categories
     # Tags widget configurations
     -
         # Where should the widget be placed, left sidebar or right sidebar
