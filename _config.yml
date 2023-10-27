@@ -68,3 +68,5 @@ deploy:
   type: git
   repo: https://github.com/TimingJL/blog
   branch: gh-pages
+toc:
+  maxDepth: 3
