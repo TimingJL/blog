@@ -254,9 +254,9 @@ widgets:
             Medium:
                 icon: fab fa-medium
                 url: https://medium.com/@just-taiming
-            # Facebook:
-            #     icon: fab fa-facebook
-            #     url: https://facebook.com
+            Facebook:
+                icon: fab fa-facebook
+                url: https://www.facebook.com/timing.chen/
             # Twitter:
             #     icon: fab fa-twitter
             #     url: https://twitter.com
