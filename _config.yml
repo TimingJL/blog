@@ -2,8 +2,8 @@ title: Taiming's Blog
 subtitle: Life is Fantastic
 description: ''
 keywords: null
-author: John Doe
-language: tw
+author: Taiming
+language: en
 timezone: ''
 url: https://blog.taiming.me
 root: /
@@ -65,4 +65,6 @@ exclude: null
 ignore: null
 theme: icarus
 deploy:
-  type: ''
+  type: git
+  repo: https://github.com/TimingJL/blog
+  branch: gh-pages
