@@ -1,5 +1,7 @@
 ---
 title: iThome 鐵人賽系列書籍-完整出版攻略
+cover: images/thumbnail/iThome鐵人賽系列書籍-完整出版攻略.webp
+thumbnail: images/thumbnail/iThome鐵人賽系列書籍-完整出版攻略.webp
 date: 2022-09-22 00:00:00
 toc: true
 tags:
@@ -10,7 +12,7 @@ categories:
 - 鐵人賽
 ---
 
-![](cover.webp)
+<!-- ![](cover.webp) -->
 
 今天要來揭開從無到有，出版一本 iThome 鐵人賽系列書籍的神秘面紗。
 

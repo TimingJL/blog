@@ -1,3 +1,8 @@
+sidebar:
+    left:
+        sticky: false
+    right:
+        sticky: true
 widgets:
     # Table of contents widget configurations
     -
@@ -7,7 +12,7 @@ widgets:
         # Whether to show the index of each heading
         index: true
         # Whether to collapse sub-headings when they are out-of-view
-        collapsed: false
+        collapsed: true
         # Maximum level of headings to show (1-6)
         depth: 3
     # Recent posts widget configurations
