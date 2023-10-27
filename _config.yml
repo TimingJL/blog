@@ -1,11 +1,12 @@
-title: Hexo
-subtitle: ''
+title: Taiming's Blog
+subtitle: Life is Fantastic
 description: ''
 keywords: null
 author: John Doe
-language: en
+language: tw
 timezone: ''
-url: http://example.com
+url: https://blog.taiming.me
+root: /
 permalink: ':year/:month/:day/:title/'
 permalink_defaults: null
 pretty_urls:
@@ -28,7 +29,10 @@ external_link:
   exclude: ''
 filename_case: 0
 render_drafts: false
-post_asset_folder: false
+post_asset_folder: true
+marked:
+  prependRoot: true
+  postAsset: true
 relative_link: false
 future: true
 highlight:
