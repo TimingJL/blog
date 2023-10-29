@@ -9,7 +9,7 @@ tags:
 - 出版
 - 心得
 categories:
-- 鐵人賽
+- Web Development
 ---
 
 今天要來揭開從無到有，出版一本 iThome 鐵人賽系列書籍的神秘面紗。
