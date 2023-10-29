@@ -134,10 +134,12 @@ navbar:
 article:
     # Code highlight settings
     highlight:
+        enable: true
+        auto_detect: true
         # Code highlight themes
         # https://github.com/highlightjs/highlight.js/tree/master/src/styles
-        # theme: atom-one-light
-        theme: monokai
+        theme: atom-one-light
+        # theme: monokai
         # Show copy code button
         clipboard: true
         # Default folding status of the code blocks. Can be "", "folded", "unfolded"
