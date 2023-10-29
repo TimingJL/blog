@@ -1,0 +1,298 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"><meta><title>哎呀！那些我在做React元件庫時，沒注意到的小細節！？ - Taiming&#039;s Blog</title><link rel="manifest" href="/manifest.json"><meta name="application-name" content="Taiming&#039;s Blog"><meta name="msapplication-TileImage" content="/images/taimings-blog-logo.svg"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-title" content="Taiming&#039;s Blog"><meta name="apple-mobile-web-app-status-bar-style" content="default"><meta name="description" content="刻一套元件庫，到底難不難？這個問題，從我參加鐵人賽之前，到目前已經出書了，都還一直圍繞著我。"><meta property="og:type" content="blog"><meta property="og:title" content="哎呀！那些我在做React元件庫時，沒注意到的小細節！？"><meta property="og:url" content="https://blog.taiming.me/2023/03/24/%E5%93%8E%E5%91%80%EF%BC%81%E9%82%A3%E4%BA%9B%E6%88%91%E5%9C%A8%E5%81%9AReact%E5%85%83%E4%BB%B6%E5%BA%AB%E6%99%82%EF%BC%8C%E6%B2%92%E6%B3%A8%E6%84%8F%E5%88%B0%E7%9A%84%E5%B0%8F%E7%B4%B0%E7%AF%80%EF%BC%81%EF%BC%9F/"><meta property="og:site_name" content="Taiming&#039;s Blog"><meta property="og:description" content="刻一套元件庫，到底難不難？這個問題，從我參加鐵人賽之前，到目前已經出書了，都還一直圍繞著我。"><meta property="og:locale" content="en_US"><meta property="og:image" content="https://blog.taiming.me/images/thumbnail/%E5%93%8E%E5%91%80%EF%BC%81%E9%82%A3%E4%BA%9B%E6%88%91%E5%9C%A8%E5%81%9AReact%E5%85%83%E4%BB%B6%E5%BA%AB%E6%99%82%EF%BC%8C%E6%B2%92%E6%B3%A8%E6%84%8F%E5%88%B0%E7%9A%84%E5%B0%8F%E7%B4%B0%E7%AF%80%EF%BC%81%EF%BC%9F.webp"><meta property="article:published_time" content="2023-03-23T16:00:00.000Z"><meta property="article:modified_time" content="2023-10-29T04:54:48.482Z"><meta property="article:author" content="Taiming"><meta property="article:tag" content="React小聚"><meta property="article:tag" content="React"><meta property="article:tag" content="UI/UX"><meta property="twitter:card" content="summary"><meta property="twitter:image:src" content="https://blog.taiming.me/images/thumbnail/%E5%93%8E%E5%91%80%EF%BC%81%E9%82%A3%E4%BA%9B%E6%88%91%E5%9C%A8%E5%81%9AReact%E5%85%83%E4%BB%B6%E5%BA%AB%E6%99%82%EF%BC%8C%E6%B2%92%E6%B3%A8%E6%84%8F%E5%88%B0%E7%9A%84%E5%B0%8F%E7%B4%B0%E7%AF%80%EF%BC%81%EF%BC%9F.webp"><script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","mainEntityOfPage":{"@type":"WebPage","@id":"https://blog.taiming.me/2023/03/24/%E5%93%8E%E5%91%80%EF%BC%81%E9%82%A3%E4%BA%9B%E6%88%91%E5%9C%A8%E5%81%9AReact%E5%85%83%E4%BB%B6%E5%BA%AB%E6%99%82%EF%BC%8C%E6%B2%92%E6%B3%A8%E6%84%8F%E5%88%B0%E7%9A%84%E5%B0%8F%E7%B4%B0%E7%AF%80%EF%BC%81%EF%BC%9F/"},"headline":"哎呀！那些我在做React元件庫時，沒注意到的小細節！？","image":["https://blog.taiming.me/images/thumbnail/%E5%93%8E%E5%91%80%EF%BC%81%E9%82%A3%E4%BA%9B%E6%88%91%E5%9C%A8%E5%81%9AReact%E5%85%83%E4%BB%B6%E5%BA%AB%E6%99%82%EF%BC%8C%E6%B2%92%E6%B3%A8%E6%84%8F%E5%88%B0%E7%9A%84%E5%B0%8F%E7%B4%B0%E7%AF%80%EF%BC%81%EF%BC%9F.webp"],"datePublished":"2023-03-23T16:00:00.000Z","dateModified":"2023-10-29T04:54:48.482Z","author":{"@type":"Person","name":"Taiming"},"publisher":{"@type":"Organization","name":"Taiming's Blog","logo":{"@type":"ImageObject","url":"https://blog.taiming.me/images/taimings-blog-logo.png"}},"description":"刻一套元件庫，到底難不難？這個問題，從我參加鐵人賽之前，到目前已經出書了，都還一直圍繞著我。"}</script><link rel="canonical" href="https://blog.taiming.me/2023/03/24/%E5%93%8E%E5%91%80%EF%BC%81%E9%82%A3%E4%BA%9B%E6%88%91%E5%9C%A8%E5%81%9AReact%E5%85%83%E4%BB%B6%E5%BA%AB%E6%99%82%EF%BC%8C%E6%B2%92%E6%B3%A8%E6%84%8F%E5%88%B0%E7%9A%84%E5%B0%8F%E7%B4%B0%E7%AF%80%EF%BC%81%EF%BC%9F/"><link rel="icon" href="/images/taimings-blog-logo.svg"><link rel="stylesheet" href="https://use.fontawesome.com/releases/v6.0.0/css/all.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@9.12.0/styles/atom-one-light.css"><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@400;600&amp;family=Source+Code+Pro"><link rel="stylesheet" href="/css/default.css"><style>body>.footer,body>.navbar,body>.section{opacity:0}</style><!--!--><!--!--><!--!--><!--!--><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/cookieconsent@3.1.1/build/cookieconsent.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lightgallery@1.10.0/dist/css/lightgallery.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/justifiedGallery@3.8.1/dist/css/justifiedGallery.min.css"><!--!--><!--!--><style>.pace{-webkit-pointer-events:none;pointer-events:none;-webkit-user-select:none;-moz-user-select:none;user-select:none}.pace-inactive{display:none}.pace .pace-progress{background:#3273dc;position:fixed;z-index:2000;top:0;right:100%;width:100%;height:2px}</style><script src="https://cdn.jsdelivr.net/npm/pace-js@1.2.4/pace.min.js"></script><!--!--><!--!--><!-- hexo injector head_end start --><script>
+  (function () {
+      function switchTab() {
+          if (!location.hash) {
+            return;
+          }
+
+          const id = '#' + CSS.escape(location.hash.substring(1));
+          const $tabMenu = document.querySelector(`.tabs a[href="${id}"]`);
+          if (!$tabMenu) {
+            return;
+          }
+
+          const $tabMenuContainer = $tabMenu.parentElement.parentElement;
+          Array.from($tabMenuContainer.children).forEach($menu => $menu.classList.remove('is-active'));
+          Array.from($tabMenuContainer.querySelectorAll('a'))
+              .map($menu => document.getElementById($menu.getAttribute("href").substring(1)))
+              .forEach($content => $content.classList.add('is-hidden'));
+
+          if ($tabMenu) {
+              $tabMenu.parentElement.classList.add('is-active');
+          }
+          const $activeTab = document.querySelector(id);
+          if ($activeTab) {
+              $activeTab.classList.remove('is-hidden');
+          }
+      }
+      switchTab();
+      window.addEventListener('hashchange', switchTab, false);
+  })();
+  </script><!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.3.0"></head><body class="is-2-column"><nav class="navbar navbar-main"><div class="container navbar-container"><div class="navbar-brand justify-content-center"><a class="navbar-item navbar-logo" href="/"><img src="/images/taimings-blog-logo.png" alt="Taiming&#039;s Blog" height="28"></a></div><div class="navbar-menu"><div class="navbar-start"><a class="navbar-item" href="/">Home</a><a class="navbar-item" href="/archives">Archives</a><a class="navbar-item" href="/about">About</a></div><div class="navbar-end"><a class="navbar-item is-hidden-tablet catalogue" title="Catalogue" href="javascript:;"><i class="fas fa-list-ul"></i></a><a class="navbar-item search" title="Search" href="javascript:;"><i class="fas fa-search"></i></a></div></div></div></nav><section class="section"><div class="container"><div class="columns"><div class="column order-2 column-main is-8-tablet is-8-desktop is-8-widescreen"><div class="card"><div class="card-image"><span class="image is-7by3"><img class="fill" src="/images/thumbnail/%E5%93%8E%E5%91%80%EF%BC%81%E9%82%A3%E4%BA%9B%E6%88%91%E5%9C%A8%E5%81%9AReact%E5%85%83%E4%BB%B6%E5%BA%AB%E6%99%82%EF%BC%8C%E6%B2%92%E6%B3%A8%E6%84%8F%E5%88%B0%E7%9A%84%E5%B0%8F%E7%B4%B0%E7%AF%80%EF%BC%81%EF%BC%9F.webp" alt="哎呀！那些我在做React元件庫時，沒注意到的小細節！？"></span></div><article class="card-content article" role="article"><div class="article-meta is-size-7 is-uppercase level is-mobile"><div class="level-left"><span class="level-item">Posted&nbsp;<time dateTime="2023-03-23T16:00:00.000Z" title="2023/3/24 上午12:00:00">2023-03-24</time></span><span class="level-item">Updated&nbsp;<time dateTime="2023-10-29T04:54:48.482Z" title="2023/10/29 下午12:54:48">2023-10-29</time></span><span class="level-item"><a class="link-muted" href="/categories/%E5%89%8D%E7%AB%AF/">前端</a></span><span class="level-item">an hour read (About 7068 words)</span></div></div><h1 class="title is-3 is-size-4-mobile">哎呀！那些我在做React元件庫時，沒注意到的小細節！？</h1><div class="content"><blockquote>
+<p>刻一套元件庫，到底難不難？這個問題，從我參加鐵人賽之前，到目前已經出書了，都還一直圍繞著我。</p>
+</blockquote>
+<span id="more"></span>
+
+<div class="video-container"><iframe src="https://www.youtube.com/embed/GwLEJqNQCII" frameborder="0" loading="lazy" allowfullscreen></iframe></div>
+
+<h2 id="刻一套元件庫，到底難不難？"><a href="#刻一套元件庫，到底難不難？" class="headerlink" title="刻一套元件庫，到底難不難？"></a>刻一套元件庫，到底難不難？</h2><blockquote>
+<p>Q: 你覺得刻一套元件庫，到底難不難？為什麼？<br>Q: 有沒有自己或公司團隊刻過元件庫的經驗？是否能夠分享當時的情境，為什麼公司想要這麼做？希望這個元件庫對團隊帶來什麼好處？</p>
+</blockquote>
+<p>這個問題，從我參加鐵人賽之前，到目前已經出書了，都還一直圍繞著我。<br>最一開始是我自己問我這個問題，「我選這個題目，到底難不難？能不能完賽？」</p>
+<p>可能有些人覺得很簡單，有些人覺得很難。<br>因為每個人實作的能力不一樣，或是看事情的角度也不一樣。</p>
+<p>事實上，「難不難」這個問題，定義得有點模糊，隨著他不同的題目條件，難度也會不同。</p>
+<p>在跟一些開發者聊天的時候，不知不覺就會發現，很多開發團隊、公司都有嘗試過想要自己刻一套公司自己的元件庫。所以，刻一套元件庫並不是那麼特別的事情，很多人都有類似的經驗，只是在不同的環境、條件之下，這些經驗會有些不同。舉例：</p>
+<h3 id="考量開發時間"><a href="#考量開發時間" class="headerlink" title="考量開發時間"></a>考量開發時間</h3><p>給你半年、一年的時間刻一套元件庫，當作你的年度績效，或許不難。<br>但如果要在「30 天內」，完成一套約有 30 個元件的元件庫呢？難度就會不一樣，時間充裕的話，我們可以：</p>
+<ul>
+<li>前期規劃的時候，考慮更多實作、規格的細節</li>
+<li>不用考慮時間的急迫性，你要做得多複雜都可以，不需要為了時間而捨棄功能</li>
+<li>實作的過程中，有時間可以除錯、優化、重構</li>
+<li>可以仔細、慢慢的寫測試，確保每一個細節運作正常、符合規格</li>
+</ul>
+<p>但如果你只有 30 天呢？你會想要怎麼取捨這些功能？</p>
+<blockquote>
+<p>當天有聽眾回饋或許會考慮使用一些 headless component，然後自己再基於這些基礎，實現自己想要的樣式或延伸功能</p>
+</blockquote>
+<h3 id="考量開發人數"><a href="#考量開發人數" class="headerlink" title="考量開發人數"></a>考量開發人數</h3><p>一個團隊一起合作完成一套元件庫？還是一個人獨自完成一套元件庫？其實各有其難處。</p>
+<p><strong>團隊優點：</strong></p>
+<ul>
+<li>有許多人可以一起討論，看見彼此疏忽的地方</li>
+<li>有機會發揮 1+1 &gt; 2 的效果，開發更快</li>
+</ul>
+<p><strong>團隊缺點：</strong></p>
+<ul>
+<li>人多嘴雜，難以下決定的時候，或許會拖慢開發時間</li>
+<li>需要訂定合作規範、統一 coding style，否則大家寫的 code 都不一樣。</li>
+<li>跟你討厭的人&#x2F;討厭你的人一起開發(處理人的問題，又是另外一件故事了)</li>
+</ul>
+<p><strong>個人優點：</strong></p>
+<ul>
+<li>自己能夠決定所有一切，自己就是主宰</li>
+<li>較能統一風格</li>
+</ul>
+<p><strong>個人缺點：</strong></p>
+<ul>
+<li>所有事情都要自己來、所有規格、設計、實作都要自己來</li>
+<li>只能用自己的角度看事情，沒有人一起討論，自己的盲點或疏失沒有人發現</li>
+</ul>
+<h3 id="考量元件庫的目標使用者"><a href="#考量元件庫的目標使用者" class="headerlink" title="考量元件庫的目標使用者"></a>考量元件庫的目標使用者</h3><p>過去在跟一些開發者聊天交流的時候，曾經被問過下面這個問題：</p>
+<blockquote>
+<p>每一個 component 開發，你是怎麼去想他的使用者行為？或者，你當初在設計這些 component 的時候，你是怎麼讓他更 general，假設你的 UI Library 要 release 出去的時候，如何符合大部分的人期待的使用場景？</p>
+</blockquote>
+<p>開發這套元件是要給誰用？這確實也是在開發元件時需要好好考慮的一個面向，這套元件庫是要：</p>
+<ul>
+<li>使用在自己心愛的 sideproject 上面，當然，那你就是這一切的主宰</li>
+<li>公司內部使用，或許不同公司規模也有不同考量，假設只有一兩個團隊，那相對比較單純一點。但如果是有五六個團隊以上，每個團隊又有自己的設計師、工程師，那這樣複雜度又更高了</li>
+<li>公開給全世界的開發者使用，可能又要考慮不同國家、各種不同情境，例如適合用在 B2C、B2B 產品？前台產品或後台產品的使用？要隨取隨用？還是要能夠適應各種客製化？考量點也又不一樣了</li>
+</ul>
+<p>但我覺得，想辦法做得 general 一點，固然是很有企圖心，不過如果要顧到每一種情境和開發者，一方面難度很高，另一方面會有點失去產品的定位。就像是你要開一家服飾店，你不能設定你的衣服要符合所有年齡層、男女通吃、中式、西式、歐式、美式、各種式都能夠滿足。你要做一個社群平台，你不能讓他同時又是 FB，又是 LinkedIn，又是 IG，又是 Twitter，又是 Youtube，這樣你的產品什麼都不是。</p>
+<p>所以，到底要做出什麼樣的元件庫？設定好特定一個族群的需求，也或許是一個聰明的選擇，你的目標很明確，也會讓產品很有特色！</p>
+<h3 id="刻一套元件庫，到底難不難？-1"><a href="#刻一套元件庫，到底難不難？-1" class="headerlink" title="刻一套元件庫，到底難不難？"></a>刻一套元件庫，到底難不難？</h3><p>回到先前提到的這個問題，到底刻一套元件庫難不難？我覺得，如果：</p>
+<p>「自己獨自一人」+「沒有設計師幫你設計 Design Guideline」＋「時間有限(如 30 天內)」＋「需要完成的元件很多(如要完整刻一套元件庫)」＋「目標使用者設定得很 general」</p>
+<p>那我自己個人覺得，這個任務就會變得非常難！</p>
+<p>但反之，若想要做一套品質好一點的元件庫，那麼，我們就應該要盡量避免上述的情況，免得讓自己深陷險境。</p>
+<p>可以的話，組一個好的團隊，有一群好的工程師夥伴互相良性討論，然後一位可以跟工程師溝通良好的設計師、PM，時間不要壓那麼緊，適量的元件數量，並且設定好使用者對象，那麼，我相信這個元件庫將會是非常棒的！</p>
+<h3 id="為何自己當初想不開，想獨自刻一套元件庫？"><a href="#為何自己當初想不開，想獨自刻一套元件庫？" class="headerlink" title="為何自己當初想不開，想獨自刻一套元件庫？"></a>為何自己當初想不開，想獨自刻一套元件庫？</h3><p><strong>一、面對曾經面試失利</strong><br>很久以前，曾經有一個面試官問我說，「你有沒有刻過什麼元件呢？」，身為一個前端工程師，當然是回答「有！」，說了一輪之後，問我有沒有做過某個元件可以廣泛被用在產品當中，例如「Button」這種元件，那我的回答當然也是「有呀！」，但下一個問題是，「那你怎麼去設計一個 Button 呢？」，當下真的因為經驗不足，所以面對這個問題有點傻住了，心想「Button 不就 Button 嗎？要怎麼去設計是什麼意思？」，所以這個面試也就在這樣的尷尬氛圍下結束。這成為我面試經驗當中一個很不堪的回憶，因此很希望能夠透過做點什麼來累積經驗，藉此彌補自己的不足。</p>
+<p><strong>二、覺得要湊 IT 鐵人賽 30 天，容易湊到 30 篇</strong><br>如這個標題所說，理由就是這麼單純，世界上元件那麼多，隨隨便便應該就可以湊到 30 個吧？一天一個，剛好 30 篇，完美！但是，開始擬定大綱的時候才發現，參考各大元件庫之後，擠出二十幾個就已經很不容易了，若真的要湊到 30 個的話，真的會需要去挑戰一些自己沒把握的元件。但所幸最後還是順利完成，可說是有驚無險。</p>
+<p><strong>三、覺得這個題目夠硬、夠瘋</strong><br>這個題目真的很硬，有理論、有分析、有實作。所以我覺得，雖然可能大家也有想過這個題目，但是應該沒有人敢衝。所以選這個題目，要跟人家重複的機會應該是很難，因此也更能顯示出我的作品的獨特性，覺得算是有亮點。很高深的技術、知識，我沒有把握，但是做一些瘋狂的挑戰，對我來說很可以，大不了咬著牙，眼睛一閉，撐一下就過去了。畢竟，痛苦會過去，幸福會來臨。</p>
+<p><strong>四、對自己誤會太深</strong><br>事實上我對這個題目難度的評估也是超出我意料之外，我想，這也算是我經驗不足的一個體現吧！選定這個題目之時，我覺得有點難，但應該沒問題。實際上頭洗下去之後，才發現，天啊，這真的有夠硬！早知道就不選這個題目了！不過既然已經深陷泥沼，也是自己選的，終究要對自己負責，還是硬著頭皮完成挑戰。</p>
+<h2 id="在自己刻元件之前，那些不曾想過的瑣事"><a href="#在自己刻元件之前，那些不曾想過的瑣事" class="headerlink" title="在自己刻元件之前，那些不曾想過的瑣事"></a>在自己刻元件之前，那些不曾想過的瑣事</h2><p>大家在工作的時候，不知道有沒有這樣的經驗？<br>有些元件、功能，原本覺得應該很簡單。但是，實際上動手去做的時候，才發現跟自己原本想像的不同，很多細節是過去沒有考慮過的，會出現很多意外。</p>
+<p>這些事情真的很多，今天我選三個小瑣事來跟大家分享：</p>
+<ul>
+<li>Infinite Scroll</li>
+<li>Pagination</li>
+<li>進場&#x2F;離場動畫</li>
+</ul>
+<h3 id="Infinite-Scroll"><a href="#Infinite-Scroll" class="headerlink" title="Infinite Scroll"></a>Infinite Scroll</h3><blockquote>
+<p>Infinite scroll 能在面對多筆資料時，讓捲軸滑動到底部時再載入下一頁面的資料。</p>
+</blockquote>
+<p><img src="/2023/03/24/%E5%93%8E%E5%91%80%EF%BC%81%E9%82%A3%E4%BA%9B%E6%88%91%E5%9C%A8%E5%81%9AReact%E5%85%83%E4%BB%B6%E5%BA%AB%E6%99%82%EF%BC%8C%E6%B2%92%E6%B3%A8%E6%84%8F%E5%88%B0%E7%9A%84%E5%B0%8F%E7%B4%B0%E7%AF%80%EF%BC%81%EF%BC%9F/infinite-scroll.webp"></p>
+<p>相信大家對這個元件都不陌生，大部分的社群軟體，例如臉書、IG 等等，都是不斷往下滑就能夠看見更多貼文。</p>
+<p><strong>But how?</strong></p>
+<p>Infinite Scroll 的特點是讓資料滾到底部時自動載入，所以這邊的關鍵是，我們要如何判斷「是否已經滾動到底部」？</p>
+<p>Infinite Scroll 的討論在網路上非常多，但假設我們是一個新手，如果以前真的完全沒有實作過這個元件，過去也沒有看過網路上文章的分享，那你會想要怎麼做呢？</p>
+<p>最直覺的方法就是，對 scroll 做事件監聽，並且不斷的去計算高度。</p>
+<p>「滾動到底部」換句話來說，就是你滾過的距離加上自己元素的高度，大於等於可滾動範圍的高度。</p>
+<p><img src="/2023/03/24/%E5%93%8E%E5%91%80%EF%BC%81%E9%82%A3%E4%BA%9B%E6%88%91%E5%9C%A8%E5%81%9AReact%E5%85%83%E4%BB%B6%E5%BA%AB%E6%99%82%EF%BC%8C%E6%B2%92%E6%B3%A8%E6%84%8F%E5%88%B0%E7%9A%84%E5%B0%8F%E7%B4%B0%E7%AF%80%EF%BC%81%EF%BC%9F/scroll-height.webp"></p>
+<p>「滾過的距離」＋「自己元素的高度」 ≥ 「可滾動範圍的高度」</p>
+<p>寫成程式碼大概會是這樣：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="title class_">Element</span>.<span class="property">scrollTop</span> + <span class="title class_">Element</span>.<span class="property">clientHeight</span> &gt;= <span class="title class_">Element</span>.<span class="property">scrollHeight</span></span><br></pre></td></tr></table></figure>
+
+<p>用 React 來實現，我們可以考慮在 useEffect 裡面對 scroll 做事件監聽，當滾動到底部的條件達成時，去加載更多的內容：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="title function_">useEffect</span>(<span class="function">() =&gt;</span> &#123;</span><br><span class="line">  <span class="keyword">const</span> <span class="title function_">handleScroll</span> = (<span class="params"></span>) =&gt; &#123;</span><br><span class="line">    <span class="keyword">if</span> (滑動到底部) &#123;</span><br><span class="line">      <span class="comment">// 加載更多內容</span></span><br><span class="line">    &#125;</span><br><span class="line">  &#125;;</span><br><span class="line">  container.<span class="title function_">addEventListener</span>(<span class="string">&#x27;scroll&#x27;</span>, <span class="string">&#x27;handleScroll&#x27;</span>);</span><br><span class="line">  <span class="keyword">return</span> <span class="function">() =&gt;</span> &#123;</span><br><span class="line">    container.<span class="title function_">removeEventListener</span>(<span class="string">&#x27;scroll&#x27;</span>, <span class="string">&#x27;handleScroll&#x27;</span>);</span><br><span class="line">  &#125;;</span><br><span class="line">&#125;, []);</span><br></pre></td></tr></table></figure>
+
+<p>這個做法的優點是很直覺、很簡單，基本上我們第一時間應該都可以想到這個做法。</p>
+<p>但缺點也是很顯而易見，這些程式碼都在 main thread 上運行，需要不斷監聽 scroll 事件，每次滾動時都需要重新計算元素的位置信息，因此可能會影響性能。</p>
+<p>即使，你不是往下滑，而是往上滑，因著 scroll 事件，這個計算的 function 還是會不斷的被觸發，顯然這是個沒有效率的做法，因為他一直在做一些無謂的運算。</p>
+<p>當你意識到這個問題，開始想要去找一些解決方案的時候，我們就能看到許多開發者會推薦你另一種做法，就是透過「Intersection Observer API」來實現。</p>
+<blockquote>
+<p>Intersection Observer API 的核心精神是「當被觀察者與觀察範圍重疊到某個百分比時，呼叫我的 callback function 做某件事」。</p>
+</blockquote>
+<p>所以重點有三個，「觀察者」、「被觀察者」、「要被呼叫的 callback」。</p>
+<p><img src="/2023/03/24/%E5%93%8E%E5%91%80%EF%BC%81%E9%82%A3%E4%BA%9B%E6%88%91%E5%9C%A8%E5%81%9AReact%E5%85%83%E4%BB%B6%E5%BA%AB%E6%99%82%EF%BC%8C%E6%B2%92%E6%B3%A8%E6%84%8F%E5%88%B0%E7%9A%84%E5%B0%8F%E7%B4%B0%E7%AF%80%EF%BC%81%EF%BC%9F/intersection-api.webp"></p>
+<p>以上圖來說</p>
+<ul>
+<li>觀察者：藍色的框框就是我們觀察的範圍，上述例子是 Browsers viewport。</li>
+<li>被觀察者：我們可以看到藍色框框下面有一個深色矩形，這表示被觀察的對象。</li>
+<li>要被呼叫的 callback： 當被觀察的深色矩形因著滾動事件進到藍色的框框的可視範圍內，就觸發這個 callback，裡面做的事情就是去加載更多內容進來。</li>
+</ul>
+<p>詳細的實作方式我就不在這邊說明了，我想說的是，直覺的做法固然很好，也很有用，但是如果能夠參考別人的做法，就能夠得到意外的收穫和學習！這是我曾經忽略的部分。</p>
+<p><strong>參考文章：</strong></p>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://oldmo860617.medium.com/react-window-%E8%88%87-intersectionobserver-api-%E5%AF%A6%E7%8F%BE%E7%84%A1%E9%99%90%E6%8D%B2%E5%8B%95-dcard-%E6%96%87%E7%AB%A0%E9%96%B1%E8%AE%80%E5%99%A8%E4%B9%8B%E5%BF%83%E5%BE%97%E7%B4%80%E9%8C%84-97bc1c3faa07">React window 與 IntersectionObserver API 實現無限捲動 Dcard 文章閱讀器之心得紀錄 — Kyle Mo</a></li>
+<li><a target="_blank" rel="noopener" href="https://shubo.io/intersection-observer-api/">如何用 Intersection Observer API 實作 Infinite Scroll&#x2F;Lazy Loading — Shubo 的程式開發筆記</a></li>
+</ul>
+<h3 id="Pagination"><a href="#Pagination" class="headerlink" title="Pagination"></a>Pagination</h3><blockquote>
+<p>Pagination 是一個分頁元件。當頁面中一次要載入過多的資料時，載入及渲染將會花費更多的時間，因此，考慮分批載入資料的時候，需要分頁元件來幫助我們在不同頁面之間切換。</p>
+</blockquote>
+<p><img src="/2023/03/24/%E5%93%8E%E5%91%80%EF%BC%81%E9%82%A3%E4%BA%9B%E6%88%91%E5%9C%A8%E5%81%9AReact%E5%85%83%E4%BB%B6%E5%BA%AB%E6%99%82%EF%BC%8C%E6%B2%92%E6%B3%A8%E6%84%8F%E5%88%B0%E7%9A%84%E5%B0%8F%E7%B4%B0%E7%AF%80%EF%BC%81%EF%BC%9F/pagination.webp"></p>
+<h4 id="情境一"><a href="#情境一" class="headerlink" title="情境一"></a>情境一</h4><p>當我們開開心心的完成了一個 Pagination 元件的時候：</p>
+<p><img src="/2023/03/24/%E5%93%8E%E5%91%80%EF%BC%81%E9%82%A3%E4%BA%9B%E6%88%91%E5%9C%A8%E5%81%9AReact%E5%85%83%E4%BB%B6%E5%BA%AB%E6%99%82%EF%BC%8C%E6%B2%92%E6%B3%A8%E6%84%8F%E5%88%B0%E7%9A%84%E5%B0%8F%E7%B4%B0%E7%AF%80%EF%BC%81%EF%BC%9F/pagination-element.webp"></p>
+<p>我們是否能夠想到，會不會有一天他會變得太長呢？如下圖：</p>
+<p><img src="/2023/03/24/%E5%93%8E%E5%91%80%EF%BC%81%E9%82%A3%E4%BA%9B%E6%88%91%E5%9C%A8%E5%81%9AReact%E5%85%83%E4%BB%B6%E5%BA%AB%E6%99%82%EF%BC%8C%E6%B2%92%E6%B3%A8%E6%84%8F%E5%88%B0%E7%9A%84%E5%B0%8F%E7%B4%B0%E7%AF%80%EF%BC%81%EF%BC%9F/pagination-element-long.webp"></p>
+<p>我個人覺得，能夠想到這一步其實就已經蠻厲害的了！</p>
+<p>過往比較沒有經驗的時候，通常會忽略頁數太長的問題，因為自己在測試的時候通常覺得功能沒什麼問題就 ok。剛剛上到正式機，因為資料量也還沒那麼多，所以也不會發現問題。等到使用者新增的資料越來越多，才發現，怎麼頁數會變這麼多！或是使用者發現怎麼破版了！這時候才會突然驚覺糗大了！</p>
+<p>所以我才覺得，能夠在這之前就發現，真的是擁有豐富的經驗，或是曾經被這件事情給雷過。</p>
+<p>在行動裝置普及的當代，Pagination 太長很容易造成破版，因此需要適當的縮短節點。但是，縮短節點應該要怎麼處理？</p>
+<p>在沒有時間考慮太多的情況下，我想了一個規則來縮短節點：</p>
+<ul>
+<li>留頭、留尾</li>
+<li>留 current — 1, current, current + 1 這幾個 page</li>
+<li>其他的都省略</li>
+</ul>
+<p>成功縮短之後成果如下圖：</p>
+<p><img src="/2023/03/24/%E5%93%8E%E5%91%80%EF%BC%81%E9%82%A3%E4%BA%9B%E6%88%91%E5%9C%A8%E5%81%9AReact%E5%85%83%E4%BB%B6%E5%BA%AB%E6%99%82%EF%BC%8C%E6%B2%92%E6%B3%A8%E6%84%8F%E5%88%B0%E7%9A%84%E5%B0%8F%E7%B4%B0%E7%AF%80%EF%BC%81%EF%BC%9F/pagination-chuncated.webp"></p>
+<p>看起來有模有樣的不是嗎？我當初真的覺得自己很聰明…</p>
+<p><img src="/2023/03/24/%E5%93%8E%E5%91%80%EF%BC%81%E9%82%A3%E4%BA%9B%E6%88%91%E5%9C%A8%E5%81%9AReact%E5%85%83%E4%BB%B6%E5%BA%AB%E6%99%82%EF%BC%8C%E6%B2%92%E6%B3%A8%E6%84%8F%E5%88%B0%E7%9A%84%E5%B0%8F%E7%B4%B0%E7%AF%80%EF%BC%81%EF%BC%9F/meme-smart.webp"></p>
+<p>但事實上，這樣想還是太單純了，怎麼說呢？</p>
+<p>想想看，考慮到邊界狀況，例如頭尾剛好就是 current + 1, current — 1 ，我們可能就會這樣處理：</p>
+<p><img src="/2023/03/24/%E5%93%8E%E5%91%80%EF%BC%81%E9%82%A3%E4%BA%9B%E6%88%91%E5%9C%A8%E5%81%9AReact%E5%85%83%E4%BB%B6%E5%BA%AB%E6%99%82%EF%BC%8C%E6%B2%92%E6%B3%A8%E6%84%8F%E5%88%B0%E7%9A%84%E5%B0%8F%E7%B4%B0%E7%AF%80%EF%BC%81%EF%BC%9F/pagination-truncaked-case-01.webp"></p>
+<p>另外，符合上述三個規則的還有這樣：</p>
+<p><img src="/2023/03/24/%E5%93%8E%E5%91%80%EF%BC%81%E9%82%A3%E4%BA%9B%E6%88%91%E5%9C%A8%E5%81%9AReact%E5%85%83%E4%BB%B6%E5%BA%AB%E6%99%82%EF%BC%8C%E6%B2%92%E6%B3%A8%E6%84%8F%E5%88%B0%E7%9A%84%E5%B0%8F%E7%B4%B0%E7%AF%80%EF%BC%81%EF%BC%9F/pagination-truncaked-case-02.webp"></p>
+<p>符合上述三個規則的其實有各種可能性，簡單條列一下如下圖：</p>
+<p><img src="/2023/03/24/%E5%93%8E%E5%91%80%EF%BC%81%E9%82%A3%E4%BA%9B%E6%88%91%E5%9C%A8%E5%81%9AReact%E5%85%83%E4%BB%B6%E5%BA%AB%E6%99%82%EF%BC%8C%E6%B2%92%E6%B3%A8%E6%84%8F%E5%88%B0%E7%9A%84%E5%B0%8F%E7%B4%B0%E7%AF%80%EF%BC%81%EF%BC%9F/pagination-truncaked-case-overall.webp"></p>
+<p>有沒有發現一件事？我們的 Pagination 居然在不同的邊界條件之下會有不同的節點數量，會像金箍棒一樣變長變短。</p>
+<p>因此，使用者沒有辦法透過你的 Pagination 做「連續點擊」。換句話說，當你的 Pagination 會忽長忽短的時候，使用者在滑鼠游標位置不變的情況下，有可能會點擊到他預期以外的節點。</p>
+<p>這真的是非常的糟糕，就像是你在看漫畫網站的時候，想要點下一頁，卻不小心點到突然跳出來的色情網站廣告一樣慘，因為你媽媽可能要叫你去吃飯的時候來到你房間，而你剛好就在那個不小心的時間點出意外。</p>
+<p>因此，要如何讓 Pagination 能夠固定長度，確保使用者不會不小心點到他不想要點的按鈕？這真的也是容易被我們忽略的小細節呀！</p>
+<h4 id="情境二"><a href="#情境二" class="headerlink" title="情境二"></a>情境二</h4><p>Pagination 是一個很常見的元件，因此在各個產品上面都很容易發現他的蹤跡。也因此，常常他也需要為了符合各個產品的情境而需要做出對應的調整。</p>
+<p>有時候我們需要不同樣式，但同樣邏輯的 Pagination。例如：</p>
+<ul>
+<li>比較龐大複雜的系統，為了符合不同頁面功能的需要</li>
+<li>一個大公司內部有好多個不同產品的團隊，雖然公司有內部開發的 UI Library，但是不同產品希望有不同的樣式</li>
+<li>開放給大眾用的 Pagination，希望盡可能做得 general 一點<br>那該怎麼做才能夠讓這個 Pagination 能夠 general 一點呢？</li>
+</ul>
+<p>其中一個很直覺的想法就是，或許我們可以用 props 來控制各種可以客製化的屬性，例如節點大小、填充模式、顏色、外觀是否有圓角、隱藏節點的時候該保留幾個兄弟節點…等等。</p>
+<p>要客製化的話，會有非常多的屬性可以設置，但是，如果這些屬性全部都由 props 來控制的話，那想必你的 Pagination 有可能就會變成下面這樣：</p>
+<figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">&lt;<span class="title class_">Pagination</span></span><br><span class="line">  classes=&#123;classes&#125;</span><br><span class="line">  size=&#123;size&#125;</span><br><span class="line">  variant=&#123;variant&#125;</span><br><span class="line">  defaultPage=&#123;defaultPage&#125;</span><br><span class="line">  page=&#123;page&#125;</span><br><span class="line">  pageSize=&#123;pageSize&#125;</span><br><span class="line">  disabled=&#123;disabled&#125;</span><br><span class="line">  color=&#123;color&#125;</span><br><span class="line">  shape=&#123;shape&#125;</span><br><span class="line">  siblingCount=&#123;siblingCount&#125;</span><br><span class="line">  boundaryCount=&#123;boundaryCount&#125;</span><br><span class="line">  hideNextButton=&#123;hideNextButton&#125;</span><br><span class="line">  hidePrevButton=&#123;hidePrevButton&#125;</span><br><span class="line">  showFirstButton=&#123;showFirstButton&#125;</span><br><span class="line">  showLastButton=&#123;showLastButton&#125;</span><br><span class="line">  onChange=&#123;onChange&#125;</span><br><span class="line">  ...其他</span><br><span class="line">/&gt;</span><br></pre></td></tr></table></figure>
+
+<p>我想，看到這樣千瘡百孔的 props 傳入的時候，必定會眉頭一皺，因為這樣真的很不容易看出這個元件長什麼樣子，密密麻麻的，很難閱讀也很難維護。</p>
+<p>而且 props 太多的話，到時候我們的 Pagination 要用在各個頁面的時候，也會很難移植，因為你必須要確保每一個 props 傳入的值都是你所預期的，未來要改也會很難改，因為東西一多，就可能會漏東漏西。</p>
+<p>就在這個時候，我發現 Material UI 提供了一個令我醍醐灌頂的想法，「usePagination」。</p>
+<blockquote>
+<p><strong>usePagination</strong><br>For advanced customization use cases, a headless usePagination() hook is exposed. It accepts almost the same options as the Pagination component minus all the props related to the rendering of JSX. The Pagination component is built on this hook.</p>
+</blockquote>
+<p>一個天外之音打進我的心頭，「誰跟你講元件一定要帶有樣式？」</p>
+<p>usePagination 很漂亮的把 Pagination 的邏輯和選染樣式拆開來處理。usePagination 只處理邏輯的部分，而樣式的部分則留給開發者自己客製化。</p>
+<p>因為這是一個「React」的元件庫，因此他使用到了 React 的特色，Custom Hooks 來實作，這點我真的覺得很厲害！</p>
+<blockquote>
+<p>在 React 中，Custom Hooks 是一種函數，它們可以讓你在多個組件之間共享邏輯、狀態和行為，從而幫助你更好地組織和重用程式碼。</p>
+</blockquote>
+<p>如果我們把邏輯跟樣式分開，邏輯的部分共用成 usePagination 的話，這樣各團隊就能夠共用程式碼，也能夠擁有自己客製的樣式了。</p>
+<p>簡單示範一下 usePagination 的使用：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> &#123; items &#125; = <span class="title function_">usePagination</span>(&#123; <span class="attr">count</span>: <span class="number">10</span> &#125;);</span><br></pre></td></tr></table></figure>
+
+<p>我們只需要傳入適當的參數，就能夠得到一系列的節點，這些節點包含了每一個節點所需要的資訊還有被點擊時觸發的事件，例如上一頁、下一頁：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> items = [</span><br><span class="line">  &#123; <span class="attr">type</span>: <span class="string">&#x27;previous&#x27;</span>, <span class="attr">onClick</span>: <span class="function">() =&gt;</span> &#123;...&#125; &#125;,</span><br><span class="line">  &#123; <span class="attr">type</span>: <span class="string">&#x27;page&#x27;</span>, <span class="attr">page</span>: <span class="number">1</span>, <span class="attr">isCurrent</span>: <span class="literal">true</span>, <span class="attr">onClick</span>: <span class="function">() =&gt;</span> &#123;...&#125; &#125;,</span><br><span class="line">  &#123; <span class="attr">type</span>: <span class="string">&#x27;page&#x27;</span>, <span class="attr">page</span>: <span class="number">2</span>, <span class="attr">isCurrent</span>: <span class="literal">false</span>, <span class="attr">onClick</span>: <span class="function">() =&gt;</span> &#123;...&#125; &#125;,</span><br><span class="line">  &#123; <span class="attr">type</span>: <span class="string">&#x27;page&#x27;</span>, <span class="attr">page</span>: <span class="number">3</span>, <span class="attr">isCurrent</span>: <span class="literal">false</span>, <span class="attr">onClick</span>: <span class="function">() =&gt;</span> &#123;...&#125; &#125;,</span><br><span class="line">  &#123; <span class="attr">type</span>: <span class="string">&#x27;page&#x27;</span>, <span class="attr">page</span>: <span class="number">4</span>, <span class="attr">isCurrent</span>: <span class="literal">false</span>, <span class="attr">onClick</span>: <span class="function">() =&gt;</span> &#123;...&#125; &#125;,</span><br><span class="line">  &#123; <span class="attr">type</span>: <span class="string">&#x27;page&#x27;</span>, <span class="attr">page</span>: <span class="number">5</span>, <span class="attr">isCurrent</span>: <span class="literal">false</span>, <span class="attr">onClick</span>: <span class="function">() =&gt;</span> &#123;...&#125; &#125;,</span><br><span class="line">  ...</span><br><span class="line">  &#123;<span class="attr">type</span>: <span class="string">&#x27;next&#x27;</span>, <span class="attr">onClick</span>: <span class="function">() =&gt;</span> &#123;...&#125;&#125;,</span><br><span class="line">];</span><br></pre></td></tr></table></figure>
+
+<p>「誰跟你講元件一定要帶有樣式？」這句話真的帶我從原本固定習慣的思維當中跳脫出來。</p>
+<h3 id="進場-離場動畫"><a href="#進場-離場動畫" class="headerlink" title="進場&#x2F;離場動畫"></a>進場&#x2F;離場動畫</h3><p><img src="/2023/03/24/%E5%93%8E%E5%91%80%EF%BC%81%E9%82%A3%E4%BA%9B%E6%88%91%E5%9C%A8%E5%81%9AReact%E5%85%83%E4%BB%B6%E5%BA%AB%E6%99%82%EF%BC%8C%E6%B2%92%E6%B3%A8%E6%84%8F%E5%88%B0%E7%9A%84%E5%B0%8F%E7%B4%B0%E7%AF%80%EF%BC%81%EF%BC%9F/drawer.webp"></p>
+<p>在寫前端應用程式難免會碰到需要動畫的時候，尤其是元件的進場與離場動畫。例如 Modal, Drawer…等等。</p>
+<p>動畫在前端介面當中， 真的扮演了畫龍點睛的角色。</p>
+<p>想想看，如果我們很生硬的直接把元件塞進畫面，那元件在使用者看來就會很「突然的」出現或消失，像是下面這樣：</p>
+<p><img src="/2023/03/24/%E5%93%8E%E5%91%80%EF%BC%81%E9%82%A3%E4%BA%9B%E6%88%91%E5%9C%A8%E5%81%9AReact%E5%85%83%E4%BB%B6%E5%BA%AB%E6%99%82%EF%BC%8C%E6%B2%92%E6%B3%A8%E6%84%8F%E5%88%B0%E7%9A%84%E5%B0%8F%E7%B4%B0%E7%AF%80%EF%BC%81%EF%BC%9F/drawer-without-transition.gif"></p>
+<p>這真的是非常的突兀、非常不優雅！</p>
+<p><img src="/2023/03/24/%E5%93%8E%E5%91%80%EF%BC%81%E9%82%A3%E4%BA%9B%E6%88%91%E5%9C%A8%E5%81%9AReact%E5%85%83%E4%BB%B6%E5%BA%AB%E6%99%82%EF%BC%8C%E6%B2%92%E6%B3%A8%E6%84%8F%E5%88%B0%E7%9A%84%E5%B0%8F%E7%B4%B0%E7%AF%80%EF%BC%81%EF%BC%9F/meme-no-elegant.webp"></p>
+<p>因此，為了比較好的使用者體驗，我們會讓元件「優雅的」進場或離場，例如滑入 (Slide In)／滑出 (Slide Out) ，所以我們加上一些 transition：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> <span class="title class_">DrawerContainer</span> = styled.<span class="property">div</span><span class="string">`</span></span><br><span class="line"><span class="string">  background: #0B87FF;</span></span><br><span class="line"><span class="string">  height: 100vh;</span></span><br><span class="line"><span class="string">  width: 300px;</span></span><br><span class="line"><span class="string">  position: fixed;</span></span><br><span class="line"><span class="string">  top: 0px;</span></span><br><span class="line"><span class="string">  transform: translateX(<span class="subst">$&#123;props =&gt; props.$open ? <span class="string">&#x27;0&#x27;</span> : <span class="string">&#x27;-100&#x27;</span>&#125;</span>%);</span></span><br><span class="line"><span class="string">  transition: transform 0.35s;</span></span><br><span class="line"><span class="string">`</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> <span class="title function_">Drawer</span> = (<span class="params">&#123; open &#125;</span>) =&gt; &#123;</span><br><span class="line">  <span class="keyword">return</span> (</span><br><span class="line">    <span class="language-xml"><span class="tag">&lt;<span class="name">DrawerContainer</span> $<span class="attr">open</span>=<span class="string">&#123;open&#125;</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">      Content</span></span><br><span class="line"><span class="language-xml">    <span class="tag">&lt;/<span class="name">DrawerContainer</span>&gt;</span></span></span><br><span class="line">  );</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<p>我們可以看到上述程式碼當中，透過 styled-components 的 props 傳入，來控制元件的樣式，因此，我們就會得到了一個擁有優雅動畫的 Drawer 元件了：</p>
+<p><img src="/2023/03/24/%E5%93%8E%E5%91%80%EF%BC%81%E9%82%A3%E4%BA%9B%E6%88%91%E5%9C%A8%E5%81%9AReact%E5%85%83%E4%BB%B6%E5%BA%AB%E6%99%82%EF%BC%8C%E6%B2%92%E6%B3%A8%E6%84%8F%E5%88%B0%E7%9A%84%E5%B0%8F%E7%B4%B0%E7%AF%80%EF%BC%81%EF%BC%9F/drawer-with-transition.gif"></p>
+<p>看起來真的是令人通體舒暢不是嗎？</p>
+<p>然而，當你沉浸在這個優雅的動畫中時，突然開啟了檢視原始碼，就會赫然想到一件令人介意的事，那就是，當 Drawer 離場之後，他的節點在 DOM Tree 裡面還是沒有消失，只是使用者看到的畫面消失而已。</p>
+<p>因此，為了讓節點可以消失，所以除了動畫的 open 以外，我們再把 open 拿來控制節點是否渲染：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> <span class="title function_">Drawer</span> = (<span class="params">&#123; open &#125;</span>) =&gt; &#123;</span><br><span class="line">  <span class="keyword">return</span> open &amp;&amp; (</span><br><span class="line">    <span class="language-xml"><span class="tag">&lt;<span class="name">DrawerContainer</span> $<span class="attr">open</span>=<span class="string">&#123;open&#125;</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">      Content</span></span><br><span class="line"><span class="language-xml">    <span class="tag">&lt;/<span class="name">DrawerContainer</span>&gt;</span></span></span><br><span class="line">  );</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<p>這樣，我們同時有了可以控制動畫的 props，也會在 open 變成 false 的時候把 Drawer 元件拿掉。</p>
+<p>但事實上真是如此嗎？我們來看一下成果：</p>
+<p><img src="/2023/03/24/%E5%93%8E%E5%91%80%EF%BC%81%E9%82%A3%E4%BA%9B%E6%88%91%E5%9C%A8%E5%81%9AReact%E5%85%83%E4%BB%B6%E5%BA%AB%E6%99%82%EF%BC%8C%E6%B2%92%E6%B3%A8%E6%84%8F%E5%88%B0%E7%9A%84%E5%B0%8F%E7%B4%B0%E7%AF%80%EF%BC%81%EF%BC%9F/drawer-without-transition.gif"></p>
+<p>你會發現你又回到了不優雅的樣子……</p>
+<p>雖然這個方法解決了節點不渲染在 DOM Tree 上的問題，可是原本寫的 transition 動畫卻消失了！</p>
+<p>原因是若直接把元件拔掉，他沒有時間可以做 Transition。</p>
+<p>我的天啊！原來這件事情比我想像的還要複雜許多！</p>
+<p>可是我們觀察那些常用的元件庫，例如 MUI，卻可以發現 Drawer 在離場的時候，DOM Tree 裡面的節點會被移除，並且擁有非常優雅的動畫：</p>
+<p><img src="/2023/03/24/%E5%93%8E%E5%91%80%EF%BC%81%E9%82%A3%E4%BA%9B%E6%88%91%E5%9C%A8%E5%81%9AReact%E5%85%83%E4%BB%B6%E5%BA%AB%E6%99%82%EF%BC%8C%E6%B2%92%E6%B3%A8%E6%84%8F%E5%88%B0%E7%9A%84%E5%B0%8F%E7%B4%B0%E7%AF%80%EF%BC%81%EF%BC%9F/mui-drawer.gif"></p>
+<p>這表示，我們想要保持優雅動畫的同時，要控制 Drawer 退場後在 DOM Tree 裡面的節點會被移除這件事情是可行的，只是我們的方法或想法錯了。</p>
+<p>仔細想想，只透過一個 boolean 來控制的話，有點難同時做到這個效果。<br>因為滑入、滑出，跟是否在 DOM Tree 當中渲染，是兩件獨立不同的事情。沒有一開始想的那麼單純。</p>
+<p>那我們有可能的解決方法如下：</p>
+<ul>
+<li>使用 setTimeout 搭配 open&#x2F;visible 兩個參數分別控制這兩件事</li>
+<li>使用 react-transition-group 等處理動畫的套件幫忙</li>
+<li>其他厲害的方法</li>
+</ul>
+<p>犯了這個蠢，確實讓我思考了一些事。有時候我們乍看之下很自然、很簡單的東西，仔細觀察之後會發現其實有很多巧思在其中，瞭解他的巧思之後，<br>不禁會對這個元件設計的用心敬畏三分。</p>
+<h2 id="總結"><a href="#總結" class="headerlink" title="總結"></a>總結</h2><p>在做元件庫的過程當中，除了今天小聚提到的幾個主題之外，還有許多我沒注意到的小細節，例如 Controlled vs Uncontrolled 的問題、props 參數命名的問題、元件庫整體性一致性的問題…等等，有許多小細節在實作的過程當中值得拿出來討論。</p>
+<p>另外，在忽略這些小細節的過程當中，越來越覺得自己關起來蠻幹是一個對工程師而言自殺式的做法，所謂「獨自做一套元件庫」並不意味著你的環境沒有人可以跟你合作。不願意傾聽別人的意見和想法，覺得別人的想法都不如自己、都有疏漏，其實也是一種閉門造車。然而，如果你的團隊裡面只有你一個人，也不代表沒辦法跟別人交流，現今網路這麼發達，懂得尋找資源，也能夠避免讓自己成為井底之蛙。</p>
+<p>最後，有時候我們乍看之下很自然、很簡單的東西，仔細觀察之後會發現其實有很多巧思在其中，有他厲害的地方、值得學習的地方。事實上，不只是對自己手上的專案是如此，對於身邊的人、合作的同事也是一樣，在這部分我也是有深刻的感觸。</p>
+<h2 id="參考"><a href="#參考" class="headerlink" title="參考"></a>參考</h2><p><a target="_blank" rel="noopener" href="https://www.tenlong.com.tw/products/9786263332898">https://www.tenlong.com.tw/products/9786263332898</a></p>
+<h2 id="React-tw-小聚"><a href="#React-tw-小聚" class="headerlink" title="React.tw 小聚"></a>React.tw 小聚</h2><p><a target="_blank" rel="noopener" href="https://reactjs.kktix.cc/events/react16">Reactjs.tw 社群小聚 16(2023&#x2F;03&#x2F;23)</a>，這是我第一次參加小聚，沒想到第一次參加就要上台分享，真是讓人感到非常緊張，而且上半場是帥哥大神 Kyle Mo，分享得非常得精彩！</p>
+<p>不過也感謝有這次的意外，才能夠在職涯過程當中有這樣難得的經驗。如果不是意外的話，我自己可能都沒有勇氣站上台吧！</p>
+<p>真的感謝在場的聽眾給予熱情的回饋，從觀眾的問答當中我也收穫了很多，希望大家能夠繼續彼此交流，彼此成長！</p>
+<p>（附上這次分享的<a target="_blank" rel="noopener" href="https://docs.google.com/presentation/d/e/2PACX-1vSvRvTSvCIX_Wb-9t03szxa5C8QUP8Ay402nUUkkifJ1HouqVyNXoYG8FQ4_CPRL9rhhU2Ld2cnrOsJ/pub?start=true&loop=true&delayms=5000&slide=id.p">投影片連結</a>）</p>
+<h2 id="活動記錄"><a href="#活動記錄" class="headerlink" title="活動記錄"></a>活動記錄</h2><p><img src="/images/thumbnail/%E5%93%8E%E5%91%80%EF%BC%81%E9%82%A3%E4%BA%9B%E6%88%91%E5%9C%A8%E5%81%9AReact%E5%85%83%E4%BB%B6%E5%BA%AB%E6%99%82%EF%BC%8C%E6%B2%92%E6%B3%A8%E6%84%8F%E5%88%B0%E7%9A%84%E5%B0%8F%E7%B4%B0%E7%AF%80%EF%BC%81%EF%BC%9F.webp"></p>
+</div><div class="article-tags is-size-7 mb-4"><span class="mr-2">#</span><a class="link-muted mr-2" rel="tag" href="/tags/React%E5%B0%8F%E8%81%9A/">React小聚</a><a class="link-muted mr-2" rel="tag" href="/tags/React/">React</a><a class="link-muted mr-2" rel="tag" href="/tags/UI-UX/">UI/UX</a></div><!--!--></article></div><!--!--><nav class="post-navigation mt-4 level is-mobile"><div class="level-end"><a class="article-nav-next level level-item link-muted" href="/2022/09/22/iThome%E9%90%B5%E4%BA%BA%E8%B3%BD%E7%B3%BB%E5%88%97%E6%9B%B8%E7%B1%8D-%E5%AE%8C%E6%95%B4%E5%87%BA%E7%89%88%E6%94%BB%E7%95%A5/"><span class="level-item">iThome 鐵人賽系列書籍-完整出版攻略</span><i class="level-item fas fa-chevron-right"></i></a></div></nav><!--!--></div><!--!--><div class="column column-right is-4-tablet is-4-desktop is-4-widescreen  order-3 is-sticky"><div class="card widget" id="toc" data-type="toc"><div class="card-content"><div class="menu"><h3 class="menu-label">Catalogue</h3><ul class="menu-list"><li><a class="level is-mobile" href="#刻一套元件庫，到底難不難？"><span class="level-left"><span class="level-item">1</span><span class="level-item">刻一套元件庫，到底難不難？</span></span></a><ul class="menu-list"><li><a class="level is-mobile" href="#考量開發時間"><span class="level-left"><span class="level-item">1.1</span><span class="level-item">考量開發時間</span></span></a></li><li><a class="level is-mobile" href="#考量開發人數"><span class="level-left"><span class="level-item">1.2</span><span class="level-item">考量開發人數</span></span></a></li><li><a class="level is-mobile" href="#考量元件庫的目標使用者"><span class="level-left"><span class="level-item">1.3</span><span class="level-item">考量元件庫的目標使用者</span></span></a></li><li><a class="level is-mobile" href="#刻一套元件庫，到底難不難？-1"><span class="level-left"><span class="level-item">1.4</span><span class="level-item">刻一套元件庫，到底難不難？</span></span></a></li><li><a class="level is-mobile" href="#為何自己當初想不開，想獨自刻一套元件庫？"><span class="level-left"><span class="level-item">1.5</span><span class="level-item">為何自己當初想不開，想獨自刻一套元件庫？</span></span></a></li></ul></li><li><a class="level is-mobile" href="#在自己刻元件之前，那些不曾想過的瑣事"><span class="level-left"><span class="level-item">2</span><span class="level-item">在自己刻元件之前，那些不曾想過的瑣事</span></span></a><ul class="menu-list"><li><a class="level is-mobile" href="#Infinite-Scroll"><span class="level-left"><span class="level-item">2.1</span><span class="level-item">Infinite Scroll</span></span></a></li><li><a class="level is-mobile" href="#Pagination"><span class="level-left"><span class="level-item">2.2</span><span class="level-item">Pagination</span></span></a><ul class="menu-list"><li><a class="level is-mobile" href="#情境一"><span class="level-left"><span class="level-item">2.2.1</span><span class="level-item">情境一</span></span></a></li><li><a class="level is-mobile" href="#情境二"><span class="level-left"><span class="level-item">2.2.2</span><span class="level-item">情境二</span></span></a></li></ul></li><li><a class="level is-mobile" href="#進場-離場動畫"><span class="level-left"><span class="level-item">2.3</span><span class="level-item">進場/離場動畫</span></span></a></li></ul></li><li><a class="level is-mobile" href="#總結"><span class="level-left"><span class="level-item">3</span><span class="level-item">總結</span></span></a></li><li><a class="level is-mobile" href="#參考"><span class="level-left"><span class="level-item">4</span><span class="level-item">參考</span></span></a></li><li><a class="level is-mobile" href="#React-tw-小聚"><span class="level-left"><span class="level-item">5</span><span class="level-item">React.tw 小聚</span></span></a></li><li><a class="level is-mobile" href="#活動記錄"><span class="level-left"><span class="level-item">6</span><span class="level-item">活動記錄</span></span></a></li></ul></div></div><style>#toc .menu-list > li > a.is-active + .menu-list { display: block; }#toc .menu-list > li > a + .menu-list { display: none; }</style><script src="/js/toc.js" defer></script></div><div class="card widget" data-type="recent-posts"><div class="card-content"><h3 class="menu-label">Recents</h3><article class="media"><figure class="media-left"><a class="image" href="/2023/03/24/%E5%93%8E%E5%91%80%EF%BC%81%E9%82%A3%E4%BA%9B%E6%88%91%E5%9C%A8%E5%81%9AReact%E5%85%83%E4%BB%B6%E5%BA%AB%E6%99%82%EF%BC%8C%E6%B2%92%E6%B3%A8%E6%84%8F%E5%88%B0%E7%9A%84%E5%B0%8F%E7%B4%B0%E7%AF%80%EF%BC%81%EF%BC%9F/"><img src="/images/thumbnail/%E5%93%8E%E5%91%80%EF%BC%81%E9%82%A3%E4%BA%9B%E6%88%91%E5%9C%A8%E5%81%9AReact%E5%85%83%E4%BB%B6%E5%BA%AB%E6%99%82%EF%BC%8C%E6%B2%92%E6%B3%A8%E6%84%8F%E5%88%B0%E7%9A%84%E5%B0%8F%E7%B4%B0%E7%AF%80%EF%BC%81%EF%BC%9F.webp" alt="哎呀！那些我在做React元件庫時，沒注意到的小細節！？"></a></figure><div class="media-content"><p class="date"><time dateTime="2023-03-23T16:00:00.000Z">2023-03-24</time></p><p class="title"><a href="/2023/03/24/%E5%93%8E%E5%91%80%EF%BC%81%E9%82%A3%E4%BA%9B%E6%88%91%E5%9C%A8%E5%81%9AReact%E5%85%83%E4%BB%B6%E5%BA%AB%E6%99%82%EF%BC%8C%E6%B2%92%E6%B3%A8%E6%84%8F%E5%88%B0%E7%9A%84%E5%B0%8F%E7%B4%B0%E7%AF%80%EF%BC%81%EF%BC%9F/">哎呀！那些我在做React元件庫時，沒注意到的小細節！？</a></p><p class="categories"><a href="/categories/%E5%89%8D%E7%AB%AF/">前端</a></p></div></article><article class="media"><figure class="media-left"><a class="image" href="/2022/09/22/iThome%E9%90%B5%E4%BA%BA%E8%B3%BD%E7%B3%BB%E5%88%97%E6%9B%B8%E7%B1%8D-%E5%AE%8C%E6%95%B4%E5%87%BA%E7%89%88%E6%94%BB%E7%95%A5/"><img src="/images/thumbnail/iThome%E9%90%B5%E4%BA%BA%E8%B3%BD%E7%B3%BB%E5%88%97%E6%9B%B8%E7%B1%8D-%E5%AE%8C%E6%95%B4%E5%87%BA%E7%89%88%E6%94%BB%E7%95%A5.webp" alt="iThome 鐵人賽系列書籍-完整出版攻略"></a></figure><div class="media-content"><p class="date"><time dateTime="2022-09-21T16:00:00.000Z">2022-09-22</time></p><p class="title"><a href="/2022/09/22/iThome%E9%90%B5%E4%BA%BA%E8%B3%BD%E7%B3%BB%E5%88%97%E6%9B%B8%E7%B1%8D-%E5%AE%8C%E6%95%B4%E5%87%BA%E7%89%88%E6%94%BB%E7%95%A5/">iThome 鐵人賽系列書籍-完整出版攻略</a></p><p class="categories"><a href="/categories/%E9%90%B5%E4%BA%BA%E8%B3%BD/">鐵人賽</a></p></div></article></div></div></div></div></div></section><footer class="footer"><div class="container"><div class="level"><div class="level-start"><a class="footer-logo is-block mb-2" href="/"><img src="/images/taimings-blog-logo.png" alt="Taiming&#039;s Blog" height="28"></a><p class="is-size-7"><span>&copy; 2023 Taiming</span>  Powered by <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a> &amp; <a href="https://github.com/ppoffice/hexo-theme-icarus" target="_blank" rel="noopener">Icarus</a></p></div><div class="level-end"></div></div></div></footer><script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"></script><script src="https://cdn.jsdelivr.net/npm/moment@2.22.2/min/moment-with-locales.min.js"></script><script src="https://cdn.jsdelivr.net/npm/clipboard@2.0.4/dist/clipboard.min.js" defer></script><script>moment.locale("en");</script><script>var IcarusThemeSettings = {
+            article: {
+                highlight: {
+                    clipboard: true,
+                    fold: 'unfolded'
+                }
+            }
+        };</script><script src="/js/column.js"></script><script src="/js/animation.js"></script><a id="back-to-top" title="Back to top" href="javascript:;"><i class="fas fa-chevron-up"></i></a><script src="/js/back_to_top.js" defer></script><!--!--><!--!--><!--!--><script src="https://cdn.jsdelivr.net/npm/cookieconsent@3.1.1/build/cookieconsent.min.js" defer></script><script>window.addEventListener("load", () => {
+      window.cookieconsent.initialise({
+        type: "info",
+        theme: "edgeless",
+        static: false,
+        position: "bottom-left",
+        content: {
+          message: "This website uses cookies to improve your experience.",
+          dismiss: "Got it!",
+          allow: "Allow cookies",
+          deny: "Decline",
+          link: "Learn more",
+          policy: "Cookie Policy",
+          href: "https://www.cookiesandyou.com/",
+        },
+        palette: {
+          popup: {
+            background: "#edeff5",
+            text: "#838391"
+          },
+          button: {
+            background: "#4b81e8"
+          },
+        },
+      });
+    });</script><script src="https://cdn.jsdelivr.net/npm/lightgallery@1.10.0/dist/js/lightgallery.min.js" defer></script><script src="https://cdn.jsdelivr.net/npm/justifiedGallery@3.8.1/dist/js/jquery.justifiedGallery.min.js" defer></script><script>window.addEventListener("load", () => {
+            if (typeof $.fn.lightGallery === 'function') {
+                $('.article').lightGallery({ selector: '.gallery-item' });
+            }
+            if (typeof $.fn.justifiedGallery === 'function') {
+                if ($('.justified-gallery > p > .gallery-item').length) {
+                    $('.justified-gallery > p > .gallery-item').unwrap();
+                }
+                $('.justified-gallery').justifiedGallery();
+            }
+        });</script><!--!--><!--!--><!--!--><!--!--><!--!--><script src="/js/main.js" defer></script><div class="searchbox"><div class="searchbox-container"><div class="searchbox-header"><div class="searchbox-input-container"><input class="searchbox-input" type="text" placeholder="Type something..."></div><a class="searchbox-close" href="javascript:;">×</a></div><div class="searchbox-body"></div></div></div><script src="/js/insight.js" defer></script><script>document.addEventListener('DOMContentLoaded', function () {
+            loadInsight({"contentUrl":"/content.json"}, {"hint":"Type something...","untitled":"(Untitled)","posts":"Posts","pages":"Pages","categories":"Categories","tags":"Tags"});
+        });</script></body></html>
